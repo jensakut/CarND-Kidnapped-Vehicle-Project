@@ -28,7 +28,7 @@ void ParticleFilter::init(double x, double y, double theta, double std[]) {
 	// Add random Gaussian noise to each particle.
 	// NOTE: Consult particle_filter.h for more information about this method (and others in this file).
 	num_particles = PARTICLE_NUMBER;
-	default_random_engine gen;
+	//static default_random_engine gen;
 	
 	//create a normal distribution around gps position to draw particles from
 	normal_distribution<double> dist_x(x, std[0]);
@@ -52,7 +52,7 @@ void ParticleFilter::init(double x, double y, double theta, double std[]) {
 		particles[i].theta=dist_theta(gen);
 		particles[i].weight = weight_init;
 		// Print your samples to the terminal.
-		
+
 		//cout << "Sample " << particles[i].id << " " << particles[i].x << " " << particles[i].y << " " << particles[i].theta << endl;
 	}
 	is_initialized = true;
@@ -65,7 +65,7 @@ void ParticleFilter::prediction(double dt, double std_pos[], double v, double yd
 	//  http://en.cppreference.com/w/cpp/numeric/random/normal_distribution
 	//  http://www.cplusplus.com/reference/random/default_random_engine/
 	//cout << "Prediction: " << endl; 
-	default_random_engine gen;
+	//default_random_engine gen;
 	normal_distribution<double> dist_x(0.0, std_pos[0]);
 	normal_distribution<double> dist_y(0.0, std_pos[1]);
 	normal_distribution<double> dist_theta(0.0, std_pos[2]);
@@ -203,13 +203,11 @@ void ParticleFilter::resample() {
 	for (int i = 0; i<num_particles; ++i) {
 		weights[i] = particles[i].weight;
 	}
-	//create random number generator
-	default_random_engine generator;
 	discrete_distribution<> distribution(weights.begin(), weights.end());
 	//new set of particles
 	std::vector<Particle> new_particles(num_particles);
 	for (int i = 0; i<num_particles; ++i) {
-		int number = distribution(generator);
+		int number = distribution(gen);
 		//fill new particles with drawn old particles
 		new_particles[i]=particles[number];
 		//visualize what has been drawn
