@@ -8,7 +8,9 @@ The particle_filter.cpp contains the following methods:
  3. updateWeights transforms particle's perspective into the global perspective. Then, the particles observations get associated to maps landmarks using dataAssociation() and the nearest neighbour approach. Following, the multivariate-Gaussian probability density sets weights.
  4. resample uses the weights to draw a set of new particles out of the current set. The weights represent how well a particle fits the measurement, well-fitting particles spawn multiple times. 
 
-Interestingly, the filter works with a minimum amount of 10 particles. Computing 1000 particles results in the same runtime, which could mean the filter runs faster than the simulator provides results. The following gif is made using 1000 particles. 
+Interestingly, the filter works with a minimum amount of 10 particles. Computing 1000 particles results in the same runtime, which could mean the filter runs faster than the simulator provides results. The following gif is made using 1000 particles. The animated car and the beams represent ground truth. The circle is the filter result. 
+
+
 ![Alt Text](result.gif)
 
 ## Running the Code
