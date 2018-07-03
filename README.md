@@ -5,10 +5,10 @@ The file particle_filter.cpp contains the core algorithms for the filter, while 
 The particle_filter.cpp contains the following methods: 
  1. init locates the particles around the first gps measurement 
  2. prediction moves all the particles using the control signals from the car (steering, speed, accuracy, time passed) 
- 3. updateWeights transforms particle's perspective into the global perspective. Then, the particles observations get associated to maps landmarks using dataAssociation. Following, the Multivariate-Gaussian probability density sets weights.
+ 3. updateWeights transforms particle's perspective into the global perspective. Then, the particles observations get associated to maps landmarks using dataAssociation() and the nearest neighbour approach. Following, the multivariate-Gaussian probability density sets weights.
  4. resample uses the weights to draw a set of new particles out of the current set. The weights represent how well a particle fits the measurement, well-fitting particles spawn multiple times. 
 
-Interestingly, the Filter works with a minimum amount of 10 particles. Computing 1000 particles results in the same runtime, which could mean the filter runs faster than the simulator provides results. 
+Interestingly, the filter works with a minimum amount of 10 particles. Computing 1000 particles results in the same runtime, which could mean the filter runs faster than the simulator provides results. The following gif is made using 1000 particles. 
 ![Alt Text](result.gif)
 
 ## Running the Code
