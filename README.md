@@ -1,13 +1,15 @@
 # Overview
 This repository contains all the code needed to complete the final project for the Localization course in Udacity's Self-Driving Car Nanodegree.
 
-#### Submission
-All you will submit is your completed version of `particle_filter.cpp`, which is located in the `src` directory. You should probably do a `git pull` before submitting to verify that your project passes the most up-to-date version of the grading code (there are some parameters in `src/main.cpp` which govern the requirements on accuracy and run time.)
+The file particle_filter.cpp contains the core algorithms for the filter, while the main.cpp handles the interface between the simulator and the particle filter class. 
+The particle_filter.cpp contains the following methods: 
+ 1. init locates the particles around the first gps measurement 
+ 2. prediction moves all the particles using the control signals from the car (steering, speed, accuracy, time passed) 
+ 3. updateWeights transforms particle's perspective into the global perspective. Then, the particles observations get associated to maps landmarks using dataAssociation. Following, the Multivariate-Gaussian probability density sets weights.
+ 4. resample uses the weights to draw a set of new particles out of the current set. The weights represent how well a particle fits the measurement, well-fitting particles spawn multiple times. 
 
-## Project Introduction
-Your robot has been kidnapped and transported to a new location! Luckily it has a map of this location, a (noisy) GPS estimate of its initial location, and lots of (noisy) sensor and control data.
-
-In this project you will implement a 2 dimensional particle filter in C++. Your particle filter will be given a map and some initial localization information (analogous to what a GPS would provide). At each time step your filter will also get observation and control data.
+Interestingly, the Filter works with a minimum amount of 10 particles. Computing 1000 particles results in the same runtime, which could mean the filter runs faster than the simulator provides results. 
+![Alt Text](result.gif)
 
 ## Running the Code
 This project involves the Term 2 Simulator which can be downloaded [here](https://github.com/udacity/self-driving-car-sim/releases)

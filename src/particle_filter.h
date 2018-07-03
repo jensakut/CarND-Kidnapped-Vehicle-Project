@@ -45,7 +45,7 @@ public:
 
 	// Constructor
 	// @param num_particles Number of particles
-	ParticleFilter() : num_particles(0), is_initialized(false) {}
+	ParticleFilter() : num_particles(500), is_initialized(false) {}
 
 	// Destructor
 	~ParticleFilter() {}
@@ -70,7 +70,7 @@ public:
 	 * @param velocity Velocity of car from t to t+1 [m/s]
 	 * @param yaw_rate Yaw rate of car from t to t+1 [rad/s]
 	 */
-	void prediction(double delta_t, double std_pos[], double velocity, double yaw_rate);
+	void prediction(double dt, double std_pos[], double v, double yd);
 	
 	/**
 	 * dataAssociation Finds which observations correspond to which landmarks (likely by using
